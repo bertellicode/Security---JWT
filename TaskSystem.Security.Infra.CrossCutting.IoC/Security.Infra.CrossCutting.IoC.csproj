@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TaskSystem.Security.Application\Security.Application.csproj" />
+    <ProjectReference Include="..\TaskSystem.Security.Infra.Data\Security.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>
