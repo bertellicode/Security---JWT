@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Infra.CrossCutting
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Domain.Core", "TaskSystem.Security.Domain.Core\Security.Domain.Core.csproj", "{C2FA511B-62CB-4B44-86E3-EE02B29A2F0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.Infra.CrossCutting.JWT", "Security.Infra.CrossCutting.JWT\Security.Infra.CrossCutting.JWT.csproj", "{9A8D2C5D-4B20-4525-B01F-431B378A059F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Infra.CrossCutting.JWT", "Security.Infra.CrossCutting.JWT\Security.Infra.CrossCutting.JWT.csproj", "{9A8D2C5D-4B20-4525-B01F-431B378A059F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

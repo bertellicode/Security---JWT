@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Security.Api.Configurations;
 using Security.Infra.Data.Context;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Security.Api
 {
@@ -29,16 +30,21 @@ namespace Security.Api
             services.AddDbContext<SecurityContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            // Registrar todos os DI
+            DependencyInjectionConfiguration.AddDIConfiguration(services);
+
             // Configurações de Autenticação, Autorização e JWT.
-            //services.AddSecurity(Configuration);
+            services.AddSecurity(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            // AutoMapper
-            services.AddAutoMapperSetup();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "API Security", Version = "v1" });
+            });
 
-            // Registrar todos os DI
-            services.AddDIConfiguration();
+            // AutoMapper
+            AutoMapperConfiguration.AddAutoMapperSetup(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +58,18 @@ namespace Security.Api
             {
                 app.UseHsts();
             }
+
+            app.UseExceptionHandler(new ExceptionHandlerOptions
+            {
+                ExceptionHandler = new ExceptionHandlerConfiguration().Invoke
+            });
+
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Security"); });
+
+            app.UseAuthentication();
 
             app.UseHttpsRedirection();
             app.UseMvc();

@@ -18,7 +18,7 @@ namespace Security.Infra.CrossCutting.JWT.Configurations
 
         public EncryptingCredentials EncryptingCredentials { get; }
 
-        public CredentialsConfiguration(SigningCredentials signingCredentials)
+        public CredentialsConfiguration()
         {
             SigningCredentials = new SigningCredentials(SymmetricKeySigningCredentials, SecurityAlgorithms.HmacSha256);
 

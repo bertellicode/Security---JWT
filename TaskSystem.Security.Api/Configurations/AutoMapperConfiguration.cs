@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Security.Application.AutoMapper;
 
@@ -11,7 +12,7 @@ namespace Security.Api.Configurations
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddAutoMapperSetup();
+            services.AddAutoMapper();
 
             // Registering Mappings automatically only works if the 
             // Automapper Profile classes are in ASP.NET project

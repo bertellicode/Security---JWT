@@ -9,6 +9,11 @@ namespace Security.Infra.Data.Context
 {
     public class SecurityContext : DbContext
     {
+        public SecurityContext(DbContextOptions<SecurityContext> options) : base(options)
+        {
+
+        }
+
         public DbSet<User> Users { get; set; }
 
         public DbSet<Role> Roles { get; set; }

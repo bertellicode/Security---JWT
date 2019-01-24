@@ -2,6 +2,7 @@
 using Security.Application.Interfaces;
 using Security.Application.Services;
 using Security.Domain.Core.Interfaces;
+using Security.Domain.Core.Notifications;
 using Security.Domain.Users.Interfaces.Repositories;
 using Security.Domain.Users.Interfaces.Services;
 using Security.Domain.Users.Services;
@@ -19,6 +20,9 @@ namespace Security.Infra.CrossCutting.IoC
 
             // Application
             services.AddScoped<IUserAppService, UserAppService>();
+
+            // Domain - Core
+            services.AddScoped<INotificationHandler, NotificationHandler>();
 
             // Services
             services.AddScoped<IUserService, UserService>();
