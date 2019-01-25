@@ -4,6 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Security.Domain.Core.Interfaces;
+using Security.Domain.Core.Services;
 using Security.Domain.Users.DTOs;
 using Security.Domain.Users.Entities;
 using Security.Domain.Users.Interfaces.Repositories;
@@ -12,7 +14,7 @@ using Security.Infra.CrossCutting.JWT.Interfaces;
 
 namespace Security.Domain.Users.Services
 {
-    public class UserService : IUserService
+    public class UserService : Service, IUserService
     {
         private readonly ITokenConfiguration _tokenConfiguration;
         private readonly IUserRepository _userRepository;
@@ -21,7 +23,8 @@ namespace Security.Domain.Users.Services
             => (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
 
         public UserService(ITokenConfiguration tokenConfiguration,
-                            IUserRepository userRepository)
+                            IUserRepository userRepository,
+                            INotificationHandler notificationHandler) : base(notificationHandler)
         {
             _tokenConfiguration = tokenConfiguration;
             _userRepository = userRepository;
@@ -67,6 +70,8 @@ namespace Security.Domain.Users.Services
         public Task<User> GetUser(string user, string password)
         {
             var userDb = _userRepository.GetUserIncludeRoles(user, password);
+
+            ValidateObjectIsNotNull(userDb, "Usuário ou senha inválidos!");
 
             return userDb;
         }

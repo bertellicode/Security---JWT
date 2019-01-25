@@ -26,7 +26,7 @@ namespace Security.Application.Services
 
             if (result != null)
             {
-                var response = _userService.GenerateToken(result);
+                var response = await _userService.GenerateToken(result);
 
                 return _mapper.Map<LoginReturnViewModel>(response);
             }
