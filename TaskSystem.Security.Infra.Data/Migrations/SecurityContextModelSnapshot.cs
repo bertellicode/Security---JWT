@@ -32,6 +32,11 @@ namespace Security.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new { Id = new Guid("d830ff86-142a-4450-9126-d56f4f7b35f2"), Name = "Admin" },
+                        new { Id = new Guid("21ed2c8d-cbfe-465e-9cc1-1af4f5a8d809"), Name = "Test" }
+                    );
                 });
 
             modelBuilder.Entity("Security.Domain.Users.Entities.User", b =>
@@ -67,6 +72,10 @@ namespace Security.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new { Id = new Guid("480e303e-dadb-40d8-b7db-0a7ce77b6fbf"), Email = "teste@mail.com", Name = "teste", PasswordHash = "123456", Phone = "32991447717", UserName = "teste" }
+                    );
                 });
 
             modelBuilder.Entity("Security.Domain.Users.Entities.UserRole", b =>
@@ -80,6 +89,11 @@ namespace Security.Infra.Data.Migrations
                     b.HasIndex("IdRole");
 
                     b.ToTable("UserRole");
+
+                    b.HasData(
+                        new { IdUser = new Guid("480e303e-dadb-40d8-b7db-0a7ce77b6fbf"), IdRole = new Guid("d830ff86-142a-4450-9126-d56f4f7b35f2") },
+                        new { IdUser = new Guid("480e303e-dadb-40d8-b7db-0a7ce77b6fbf"), IdRole = new Guid("21ed2c8d-cbfe-465e-9cc1-1af4f5a8d809") }
+                    );
                 });
 
             modelBuilder.Entity("Security.Domain.Users.Entities.UserRole", b =>

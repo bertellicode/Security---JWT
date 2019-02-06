@@ -59,6 +59,31 @@ namespace Security.Infra.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { new Guid("d830ff86-142a-4450-9126-d56f4f7b35f2"), "Admin" });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { new Guid("21ed2c8d-cbfe-465e-9cc1-1af4f5a8d809"), "Test" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Email", "Name", "PasswordHash", "Phone", "UserName" },
+                values: new object[] { new Guid("480e303e-dadb-40d8-b7db-0a7ce77b6fbf"), "teste@mail.com", "teste", "123456", "32991447717", "teste" });
+
+            migrationBuilder.InsertData(
+                table: "UserRole",
+                columns: new[] { "IdUser", "IdRole" },
+                values: new object[] { new Guid("480e303e-dadb-40d8-b7db-0a7ce77b6fbf"), new Guid("d830ff86-142a-4450-9126-d56f4f7b35f2") });
+
+            migrationBuilder.InsertData(
+                table: "UserRole",
+                columns: new[] { "IdUser", "IdRole" },
+                values: new object[] { new Guid("480e303e-dadb-40d8-b7db-0a7ce77b6fbf"), new Guid("21ed2c8d-cbfe-465e-9cc1-1af4f5a8d809") });
+
             migrationBuilder.CreateIndex(
                 name: "IX_UserRole_IdRole",
                 table: "UserRole",

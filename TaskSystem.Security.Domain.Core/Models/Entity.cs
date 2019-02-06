@@ -11,7 +11,7 @@ namespace Security.Domain.Core.Models
             ValidationResult = new ValidationResult();
         }
 
-        public Guid Id { get; protected set; }
+        public Guid Id { get; set; }
 
         public abstract bool IsValid();
 
