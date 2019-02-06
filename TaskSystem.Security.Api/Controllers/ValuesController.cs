@@ -14,8 +14,7 @@ namespace Security.Api.Controllers
     {
         private readonly IUser _user;
 
-        public ValuesController(INotificationHandler notifications,
-                                IUser user) 
+        public ValuesController(IUser user) 
         {
             _user = user;
         }
@@ -40,11 +39,5 @@ namespace Security.Api.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
-        }
     }
 }
