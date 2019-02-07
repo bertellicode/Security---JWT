@@ -12,11 +12,11 @@ namespace Security.Api.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly IUser _user;
+        private readonly IUserProvider _userProvider;
 
-        public ValuesController(IUser user) 
+        public ValuesController(IUserProvider userProvider) 
         {
-            _user = user;
+            _userProvider = userProvider;
         }
 
         // GET api/values
@@ -24,7 +24,7 @@ namespace Security.Api.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult<IEnumerable<string>> Get()
         {
-            var claims = _user.GetClaimsIdentity();
+            var claims = _userProvider.GetClaimsIdentity();
 
             var claimsRole = claims.Where(x => x.Type == ClaimTypes.Role).Select(x => x.Value).ToList();
 

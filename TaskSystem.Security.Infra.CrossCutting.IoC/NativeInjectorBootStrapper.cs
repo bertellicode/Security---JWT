@@ -10,6 +10,7 @@ using Security.Domain.Users.Services;
 using Security.Infra.CrossCutting.JWT.Configurations;
 using Security.Infra.CrossCutting.JWT.Interfaces;
 using Security.Infra.CrossCutting.JWT.Models;
+using Security.Infra.Data.Context;
 using Security.Infra.Data.Repositories;
 using Security.Infra.Data.UoW;
 
@@ -30,14 +31,14 @@ namespace Security.Infra.CrossCutting.IoC
             services.AddScoped<IUserService, UserService>();
 
             // Infra - Data
+            services.AddScoped<SecurityContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.AddScoped<SecurityContext>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             // Infra - JWT
             services.AddScoped<ICredentialsConfiguration, CredentialsConfiguration>();
             services.AddScoped<ITokenConfiguration, TokenConfiguration>();
-            services.AddScoped<IUser, User>();
+            services.AddScoped<IUserProvider, UserProvider>();
 
             //Web
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

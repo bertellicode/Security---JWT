@@ -3,7 +3,7 @@ using System.Security.Claims;
 
 namespace Security.Infra.CrossCutting.JWT.Interfaces
 {
-    public interface IUser
+    public interface IUserProvider
     {
 
         string Name { get; }

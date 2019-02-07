@@ -6,12 +6,12 @@ using Security.Infra.CrossCutting.JWT.Interfaces;
 
 namespace Security.Infra.CrossCutting.JWT.Models
 {
-    public class User : IUser
+    public class UserProvider : IUserProvider
     {
         private readonly IHttpContextAccessor _accessor;
         private readonly ITokenConfiguration _tokenConfiguration;
 
-        public User(IHttpContextAccessor accessor,
+        public UserProvider(IHttpContextAccessor accessor,
                     ITokenConfiguration tokenConfiguration)
         {
             _accessor = accessor;
@@ -32,7 +32,7 @@ namespace Security.Infra.CrossCutting.JWT.Models
             }
         }
 
-        string IUser.UserName { get => _accessor.HttpContext.User.Identity.Name; }
+        string IUserProvider.UserName { get => _accessor.HttpContext.User.Identity.Name; }
 
         public IEnumerable<Claim> GetClaimsIdentity()
         {
