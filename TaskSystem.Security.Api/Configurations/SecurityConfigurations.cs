@@ -27,20 +27,6 @@ namespace Security.Api.Configurations
             }).AddJwtBearer(bearerOptions =>
             {
 
-                //bearerOptions.RequireHttpsMetadata = false;
-                //bearerOptions.SaveToken = true;
-
-                //var paramsValidation = bearerOptions.TokenValidationParameters;
-
-                //paramsValidation.IssuerSigningKey = tokenConfiguration.SymmetricKeySigningCredentials;
-                //paramsValidation.ValidAudience = tokenConfiguration.Audience;
-                //paramsValidation.ValidIssuer = tokenConfiguration.Issuer;
-
-                //paramsValidation.ValidateIssuerSigningKey = true;
-                //paramsValidation.ValidateLifetime = true;
-                //paramsValidation.ClockSkew = TimeSpan.Zero;
-                //paramsValidation.TokenDecryptionKey = tokenConfiguration.SymmetricKeyEncryptingCredentials;
-
                 bearerOptions.SaveToken = true;
 
                 bearerOptions.TokenValidationParameters = new TokenValidationParameters

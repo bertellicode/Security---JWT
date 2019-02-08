@@ -32,16 +32,16 @@ namespace Security.Domain.Users.Services
 
         public async Task<TokenDto> GenerateToken(User user)
         {
-            List<Claim> userClaims = await GenerateJWTTokens(user);
+            List<Claim> userClaims = await GenerateJWTClaims(user);
 
-            ClaimsIdentity identityClaims = await GenerateIdentitiesClaims(user, userClaims);
+            ClaimsIdentity identityClaims = await GenerateBackendClaims(user, userClaims);
 
             string encodedJwt = await _tokenConfiguration.GenerateToken(identityClaims);
 
             return new TokenDto(user.UserName, user.Name, encodedJwt, _tokenConfiguration.MinutesValid);
         }
 
-        private async Task<List<Claim>> GenerateJWTTokens(User user)
+        private async Task<List<Claim>> GenerateJWTClaims(User user)
         {
             return new List<Claim>
             {
@@ -53,7 +53,7 @@ namespace Security.Domain.Users.Services
             };
         }
 
-        private async Task<ClaimsIdentity> GenerateIdentitiesClaims(User user, List<Claim> userClaims)
+        private async Task<ClaimsIdentity> GenerateBackendClaims(User user, List<Claim> userClaims)
         {
             userClaims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
             userClaims.Add(new Claim(ClaimTypes.Name, user.UserName));
